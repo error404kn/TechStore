@@ -16,5 +16,7 @@ namespace TechStore.Data
 
         public DbSet<Technics> Technics { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
     }
 }
