@@ -1,0 +1,27 @@
+﻿@model IEnumerable<TechStore.Models.Technics>
+
+    @(
+        ViewData["Title"] = "Home page"
+    )
+
+    <h2 class="my-3">Store</h2>
+
+    <div class="row">
+    @foreach (var tech in Model)
+    {
+        <div class="col-3">
+            <div class="card my-2">
+                <a class="general" asp-action="Details" asp-route-id="@tech.Id">
+                    <img src="@tech.ImageUrl" class="card-img-top w-100"/>
+                    <div class="card-body" style="height: 6em;">
+                        <h5 class="mb-3">@tech.ModelName</h5>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-text">@tech.Price.ToString("c")</span>
+                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@tech.Id" class="btn btn-success cart-btn"><i class="bi bi-cart-plus"></i></a>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+    </div>

@@ -1,0 +1,61 @@
+﻿@model TechStore.Models.Cart
+
+@* Cart View *@
+
+<h1>Cart</h1>
+
+@if (Model.CartItems.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Technic</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                var technicTotal = item.Technics.Price * item.Quantity;
+                <tr>
+                    <td> 
+                        <a class="generally" asp-controller="Home" asp-action="Details" asp-route-id="@item.Id"></a><img src="@item.Technics.ImageUrl" style="height: 4em"> </td>
+                    <td>
+                        <a class="generally" asp-controller="Home" asp-action="Details" asp-route-id="@item.Id">@item.Technics.ModelName</a>
+                    </td>
+                    <td>
+                        @technicTotal.ToString("c")
+                    </td>
+                    <td>
+                        <a asp-controller="Cart" asp-action="ReduceQuantity" asp-route-id="@item.Technics.Id"><i class="bi bi-dash-lg"></i></a>
+                        <span class="badge badge-primary text-dark">@item.Quantity</span>
+                        <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.Technics.Id"><i class="bi bi-plus-lg"></i></a>
+                    </td>
+                    <td>
+                        <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Technics.Id" class="text-danger"><i class="bi bi-x-lg"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+        <tfoot>
+            <td></td>
+            <td class="text-right"> <strong>Total: </strong> </td>
+            <td>
+                <strong>@Model?.GetCartTotal().ToString("c")</strong>
+            </td>
+            <td></td>
+        <td></td>
+        </tfoot>
+
+    </table>
+
+    <a class="generally" asp-controller="Cart" asp-action="ClearCart"> <div class="btn btn-primary float-right mr-5"><i class="bi bi-trash-fill"></i> Empty Cart </div> </a>
+}
+else
+{
+    <h3 class="text-center">Cart is empty</h3>
+}
