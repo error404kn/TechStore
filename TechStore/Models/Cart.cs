@@ -1,5 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TechStore.Data;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 
 namespace TechStore.Models
 {

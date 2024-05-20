@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TechStore.Models;
 
 namespace TechStore.Data
 {
-    public class TechStoreContext : DbContext
+    public class TechStoreContext : IdentityDbContext<DefaultUser>
     {
         public TechStoreContext (DbContextOptions<TechStoreContext> options)
             : base(options)

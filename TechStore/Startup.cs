@@ -14,7 +14,7 @@ using TechStore.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using TechStore.Models;
+
 
 namespace TechStore
 {
@@ -33,6 +33,12 @@ namespace TechStore
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+
+            services.AddDbContext<TechStoreContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("TechStoreContext")));
+
+            services.AddDefaultIdentity<DefaultUser>()
+                .AddEntityFrameworkStores<TechStoreContext>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<Cart>(sp => Cart.GetCart(sp));
