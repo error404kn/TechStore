@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -6,6 +7,8 @@ using TechStore.Models;
 
 namespace TechStore.Controllers
 {
+    /* Authorize that see detail page */
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -17,10 +20,13 @@ namespace TechStore.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> IndexAsync()
         {
             return View(await _context.Technics.ToListAsync());
         }
+
+        
 
         public async Task<IActionResult> Details(int? id)
         {
